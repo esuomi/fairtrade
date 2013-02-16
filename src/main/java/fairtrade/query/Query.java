@@ -9,14 +9,14 @@ import fairtrade.util.ArrayUtils;
  */
 public class Query {
     private Rethinkdb.Term.TermType termType;
-    private final Criterion<?>[] criteria;
+    private final Criterion[] criteria;
 
-    private Query(Rethinkdb.Term.TermType termType, Criterion<?>[] criteria) {
+    private Query(Rethinkdb.Term.TermType termType, Criterion[] criteria) {
         this.termType = termType;
         this.criteria = criteria;
     }
 
-    public static <T> Query filter(Criterion<T> first, Criterion<T>... more) {
+    public static Query filter(Criterion first, Criterion... more) {
         return new Query(Rethinkdb.Term.TermType.FILTER, ArrayUtils.merge(first, more));
     }
 }
