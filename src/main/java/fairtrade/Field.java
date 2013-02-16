@@ -14,7 +14,7 @@ public class Field {
         this.fieldName = fieldName;
     }
 
-    public Criterion<Integer> gt(int value) {
+    public Criterion gt(int value) {
         return new IntCriterion(this, Rethinkdb.Term.TermType.GT, value);
     }
 }
