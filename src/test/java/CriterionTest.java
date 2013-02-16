@@ -1,4 +1,4 @@
-import fairtrade.Criteria;
+import fairtrade.Criterion;
 import fairtrade.Rethink;
 import org.junit.Test;
 
@@ -6,11 +6,13 @@ import org.junit.Test;
  * @author Esko Suomi <suomi.esko@gmail.com>
  * @since 16.2.2013
  */
-public class CriteriaTest {
+public class CriterionTest {
 
     @Test
     public void canSpecifyGreaterThanGivenValue() throws Exception {
         String fieldName = "field";
-        Criteria criteria = Rethink.field(fieldName).gt(32);
+        Criterion criterion = Rethink.field(fieldName).gt(32);
+
+        // TODO: obviously this is missing assertions
     }
 }

@@ -1,6 +1,6 @@
 package fairtrade;
 
-import fairtrade.criteria.IntCriteria;
+import fairtrade.criteria.IntCriterion;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
@@ -14,7 +14,7 @@ public class Field {
         this.fieldName = fieldName;
     }
 
-    public Criteria gt(int value) {
-        return new IntCriteria(this, Rethinkdb.Term.GT, value);
+    public Criterion<Integer> gt(int value) {
+        return new IntCriterion(this, Rethinkdb.Term.TermType.GT, value);
     }
 }
