@@ -1,5 +1,6 @@
 package fairtrade;
 
+import com.rethinkdb.protocol.Rethinkdb;
 import fairtrade.criteria.IntCriterion;
 
 /**

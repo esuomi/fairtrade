@@ -1,3 +1,4 @@
+import com.rethinkdb.Rethinkdb;
 import fairtrade.Rethink;
 import fairtrade.query.Query;
 import org.junit.Test;
@@ -13,5 +14,7 @@ public class QueryTest {
         Query prepared = Query.filter(
             Rethink.field("foo").gt(2),
             Rethink.field("bar").gt(7));
+
+        Rethinkdb.Query rethinkQuery = prepared.toRethinkQuery();
     }
 }

@@ -1,5 +1,6 @@
 package fairtrade.query;
 
+import com.rethinkdb.protocol.Rethinkdb;
 import fairtrade.Criterion;
 import fairtrade.util.ArrayUtils;
 
@@ -18,5 +19,12 @@ public class Query {
 
     public static Query filter(Criterion first, Criterion... more) {
         return new Query(Rethinkdb.Term.TermType.FILTER, ArrayUtils.merge(first, more));
+    }
+
+    public Rethinkdb.Query toRethinkQuery() {
+
+
+
+        return null;
     }
 }
