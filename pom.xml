@@ -75,6 +75,7 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
+                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -146,6 +147,20 @@
             <groupId>org.semver</groupId>
             <artifactId>enforcer-rule</artifactId>
             <version>0.9.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.simpleframework</groupId>
+            <artifactId>simple</artifactId>
+            <version>5.0.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
