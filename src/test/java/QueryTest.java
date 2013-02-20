@@ -1,4 +1,4 @@
-import com.rethinkdb.Rethinkdb;
+import com.rethinkdb.protocol.Rethinkdb;
 import fairtrade.Rethink;
 import fairtrade.query.Query;
 import org.junit.Test;
