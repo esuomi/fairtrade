@@ -1,4 +1,4 @@
-package fairtrade.network;
+package fairtrade.client;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
