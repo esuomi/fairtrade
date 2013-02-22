@@ -144,6 +144,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.ning</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>1.7.8</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.semver</groupId>
             <artifactId>enforcer-rule</artifactId>
             <version>0.9.16</version>
