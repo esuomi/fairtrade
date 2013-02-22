@@ -1,7 +1,7 @@
 package fairtrade.mock.server;
 
 import com.rethinkdb.protocol.Rethinkdb;
-import fairtrade.network.RethinkClient;
+import fairtrade.client.RethinkClient;
 import fairtrade.util.ByteUtils;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
@@ -15,8 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>

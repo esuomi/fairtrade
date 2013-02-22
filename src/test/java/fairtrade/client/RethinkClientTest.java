@@ -1,6 +1,7 @@
-package fairtrade.network;
+package fairtrade.client;
 
-import fairtrade.mock.server.RethinkServer;import org.junit.Before;
+import fairtrade.mock.server.RethinkServer;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
