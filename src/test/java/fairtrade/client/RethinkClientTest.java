@@ -1,5 +1,6 @@
 package fairtrade.client;
 
+import fairtrade.db.Table;
 import fairtrade.mock.server.RethinkServer;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,5 +23,11 @@ public class RethinkClientTest {
     @Test
     public void canAcquireDatabaseConnectionToRethink() throws Exception {
         rethinkClient = new RethinkClient();
+    }
+
+    @Test
+    public void canAcquireTableReference() throws Exception {
+        rethinkClient = new RethinkClient();
+        Table table = rethinkClient.getTable("table");
     }
 }

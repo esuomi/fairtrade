@@ -1,5 +1,7 @@
 package fairtrade.client;
 
+import fairtrade.db.Table;
+
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
  * @since 20.2.2013
@@ -23,5 +25,9 @@ public class RethinkClient {
         this.host = host;
         this.port = port;
         // TODO: connect to Rethink
+    }
+
+    public Table getTable(String table) {
+        return new Table(table);
     }
 }
