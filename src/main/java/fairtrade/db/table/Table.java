@@ -1,7 +1,7 @@
-package fairtrade.db;
+package fairtrade.db.table;
 
-import com.ning.http.client.AsyncHttpClient;
-import fairtrade.network.Result;
+import fairtrade.db.Query;
+import fairtrade.network.Connection;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
@@ -16,7 +16,7 @@ public class Table {
         this.connection = connection;
     }
 
-    public Result<Iterable<Document>> execute() {
-        return connection.prepare();
+    public Query<TableResponse> create() {
+        return new TableQuery();
     }
 }

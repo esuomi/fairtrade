@@ -1,8 +1,12 @@
 package fairtrade.db;
 
-import fairtrade.network.Result;
+import fairtrade.db.table.Table;
+import fairtrade.db.table.TableResponse;
+import fairtrade.network.Connection;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
@@ -13,13 +17,19 @@ public class TableTest {
     private static final String TABLE_NAME = "testingTable";
     private Table table;
 
+    @Mock private Connection connection;
+
+    {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Before
     public void setUp() throws Exception {
-        table = new Table(TABLE_NAME);
+        table = new Table(TABLE_NAME, connection);
     }
 
     @Test
-    public void canBeUsedToSelectAllDataInTable() throws Exception {
-        Result<Iterable<Document>> documents = table.execute();
+    public void canBeUsedToCreateTable() throws Exception {
+        QueryResponse<TableResponse> resp = table.create().execute();
     }
 }

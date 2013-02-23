@@ -10,7 +10,7 @@ package com.rethinkdb.protocol;
 // Next, send [Query] protobufs and wait for [Response] protobufs with the same
 // token.  You can see an example exchange below in **EXAMPLE**.
 
-// A query consists of a [Term] to evaluate and a unique-per-connection
+// A query consists of a [Term] to evaluate and a unique-per-rethinkConnection
 // [token].
 
 // Tokens are used for two things:
@@ -27,7 +27,7 @@ enum Version {
 };
 
 // You send one of:
-// * A [START] query with a [Term] to evaluate and a unique-per-connection token.
+// * A [START] query with a [Term] to evaluate and a unique-per-rethinkConnection token.
 // * A [CONTINUE] query with the same token as a [START] query that returned
 //   [SUCCESS_PARTIAL] in its [Response].
 // * A [STOP] query with the same token as a [START] query that you want to stop.

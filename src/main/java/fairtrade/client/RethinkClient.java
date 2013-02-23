@@ -1,6 +1,7 @@
 package fairtrade.client;
 
-import fairtrade.db.Table;
+import fairtrade.network.rethink.RethinkConnection;
+import fairtrade.db.table.Table;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
@@ -8,10 +9,8 @@ import fairtrade.db.Table;
  */
 public class RethinkClient {
 
-    private final String host;
-    private final int port;
-
     public static final int RETHINK_DEFAULT_PORT = 28015;
+    private final RethinkConnection rethinkConnection;
 
     public RethinkClient() {
         this("localhost");
@@ -22,12 +21,11 @@ public class RethinkClient {
     }
 
     public RethinkClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-        // TODO: connect to Rethink
+        this.rethinkConnection = new RethinkConnection(host, port);
+
     }
 
     public Table getTable(String table) {
-        return new Table(table);
+        return new Table(table, rethinkConnection);
     }
 }

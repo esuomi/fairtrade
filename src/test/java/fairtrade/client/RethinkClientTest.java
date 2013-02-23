@@ -1,6 +1,6 @@
 package fairtrade.client;
 
-import fairtrade.db.Table;
+import fairtrade.db.table.Table;
 import fairtrade.mock.server.RethinkServer;
 import org.junit.Before;
 import org.junit.Test;
