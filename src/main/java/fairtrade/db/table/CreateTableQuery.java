@@ -2,12 +2,7 @@ package fairtrade.db.table;
 
 import com.rethinkdb.protocol.Rethinkdb;
 import fairtrade.db.Query;
-import fairtrade.db.QueryResponse;
-import fairtrade.db.QuerySerializationException;
 import fairtrade.db.StartQuery;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
@@ -39,9 +34,11 @@ public class CreateTableQuery extends StartQuery implements Query {
     }
 
     @Override
-    protected void contributeArguments(Rethinkdb.Term.Builder argumentBuilder) {
-        addArgument(argumentBuilder, database);
-        addArgument(argumentBuilder, tableName);
+    protected Rethinkdb.Term.Builder contributeArguments(Rethinkdb.Term.Builder argumentBuilder) {
+        Rethinkdb.Term.Builder withDb = addArgument(argumentBuilder, Rethinkdb.Term.TermType.DB, database);
+        Rethinkdb.Term.Builder withTableName = addArgument(withDb, Rethinkdb.Term.TermType.DATUM, tableName);
+
+        return withTableName;
     }
 
 }
