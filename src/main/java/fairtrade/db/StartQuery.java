@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author Esko Suomi <suomi.esko@gmail.com>
  * @since 9.3.2013
  */
-public abstract class StartQuery implements Query {
+public abstract class StartQuery<T extends QueryResponse> implements Query<T> {
     private final Rethinkdb.Term.TermType queryTermType;
 
     protected StartQuery(Rethinkdb.Term.TermType queryTermType) {
@@ -17,7 +17,7 @@ public abstract class StartQuery implements Query {
     }
 
     @Override
-    public QueryResponse execute() {
+    public T execute() {
 
         Rethinkdb.Query.Builder queryBuilder = Rethinkdb.Query.newBuilder();
         Rethinkdb.Term.Builder termBuilder = Rethinkdb.Term.newBuilder()
@@ -38,6 +38,7 @@ public abstract class StartQuery implements Query {
             throw new QuerySerializationException("Failed to serialize query", e);
         }
 
+        // TODO: introduce RawResponse -> <T>Response conversion
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

@@ -8,7 +8,7 @@ import fairtrade.db.StartQuery;
  * @author Esko Suomi <suomi.esko@gmail.com>
  * @since 23.2.2013
  */
-public class CreateTableQuery extends StartQuery implements Query {
+public class CreateTableQuery extends StartQuery<TableResponse> implements Query<TableResponse> {
 
     private final String database;
     private final String tableName;
