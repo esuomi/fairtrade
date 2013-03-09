@@ -1,6 +1,5 @@
 package fairtrade.db.table;
 
-import com.rethinkdb.protocol.Rethinkdb;
 import fairtrade.db.Query;
 import fairtrade.network.Connection;
 
@@ -19,7 +18,7 @@ public class Table {
         this.connection = connection;
     }
 
-    public Query<TableResponse> create() {
-        return new TableQuery(database, table);
+    public Query create() {
+        return new CreateTableQuery(database, table);
     }
 }

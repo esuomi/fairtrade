@@ -31,6 +31,6 @@ public class TableTest {
 
     @Test
     public void canBeUsedToCreateTable() throws Exception {
-        QueryResponse<TableResponse> resp = table.create().execute();
+        QueryResponse resp = table.create().execute();
     }
 }
