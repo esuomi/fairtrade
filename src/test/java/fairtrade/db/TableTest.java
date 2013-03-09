@@ -14,7 +14,8 @@ import org.mockito.MockitoAnnotations;
  */
 public class TableTest {
 
-    private static final String TABLE_NAME = "testingTable";
+    private static final String TABLE_NAME = "testing-table";
+    private static final String DATABASE = "testing-database";
     private Table table;
 
     @Mock private Connection connection;
@@ -25,7 +26,7 @@ public class TableTest {
 
     @Before
     public void setUp() throws Exception {
-        table = new Table(TABLE_NAME, connection);
+        table = new Table(DATABASE, TABLE_NAME, connection);
     }
 
     @Test
