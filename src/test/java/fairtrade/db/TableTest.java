@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.concurrent.Callable;
+
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
  * @since 22.2.2013
@@ -31,6 +33,6 @@ public class TableTest {
 
     @Test
     public void canBeUsedToCreateTable() throws Exception {
-        QueryResponse resp = table.create().execute();
+        Callable<TableResponse> resp = table.create().execute();
     }
 }

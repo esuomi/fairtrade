@@ -18,7 +18,7 @@ public class Table {
         this.connection = connection;
     }
 
-    public Query create() {
+    public Query<TableResponse> create() {
         return new CreateTableQuery(database, table);
     }
 }

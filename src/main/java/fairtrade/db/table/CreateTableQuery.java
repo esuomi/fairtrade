@@ -1,8 +1,10 @@
 package fairtrade.db.table;
 
-import com.rethinkdb.protocol.Rethinkdb;
 import fairtrade.db.Query;
 import fairtrade.db.StartQuery;
+
+import static com.rethinkdb.protocol.Rethinkdb.Term.Builder;
+import static com.rethinkdb.protocol.Rethinkdb.Term.TermType.*;
 
 /**
  * @author Esko Suomi <suomi.esko@gmail.com>
@@ -23,7 +25,7 @@ public class CreateTableQuery extends StartQuery<TableResponse> implements Query
     }
 
     public CreateTableQuery(String database, String tableName, String primaryKey) {
-        super(Rethinkdb.Term.TermType.TABLE_CREATE);
+        super(TABLE_CREATE, new CreateTableTranslator());
         this.database = database;
         this.tableName = tableName;
         this.primaryKey = primaryKey;
@@ -34,9 +36,9 @@ public class CreateTableQuery extends StartQuery<TableResponse> implements Query
     }
 
     @Override
-    protected Rethinkdb.Term.Builder contributeArguments(Rethinkdb.Term.Builder argumentBuilder) {
-        Rethinkdb.Term.Builder withDb = addArgument(argumentBuilder, Rethinkdb.Term.TermType.DB, database);
-        Rethinkdb.Term.Builder withTableName = addArgument(withDb, Rethinkdb.Term.TermType.DATUM, tableName);
+    protected Builder contributeArguments(Builder argumentBuilder) {
+        Builder withDb = addArgument(argumentBuilder, DB, database);
+        Builder withTableName = addArgument(withDb, DATUM, tableName);
 
         return withTableName;
     }
