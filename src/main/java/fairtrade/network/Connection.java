@@ -5,4 +5,5 @@ package fairtrade.network;
  * @since 23.2.2013
  */
 public interface Connection {
+    String getServerURI();
 }
