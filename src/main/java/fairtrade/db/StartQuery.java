@@ -1,6 +1,10 @@
 package fairtrade.db;
 
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.ListenableFuture;
+import com.ning.http.client.Response;
 import com.rethinkdb.protocol.Rethinkdb;
+import fairtrade.network.Connection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,8 +18,10 @@ public abstract class StartQuery<T extends QueryResponse> implements Query<T> {
     private final Rethinkdb.Term.TermType queryTermType;
     private final long queryToken;
     private final Translator<T> translator;
+    private final Connection connection;
 
-    protected StartQuery(Rethinkdb.Term.TermType queryTermType, Translator<T> translator) {
+    protected StartQuery(Connection connection, Rethinkdb.Term.TermType queryTermType, Translator<T> translator) {
+        this.connection = connection;
         this.queryTermType = queryTermType;
         this.translator = translator;
 
@@ -44,14 +50,23 @@ public abstract class StartQuery<T extends QueryResponse> implements Query<T> {
             throw new QuerySerializationException("Failed to serialize query", e);
         }
 
-        // TODO: introduce ning request -> response wrapping, embed into QueryResponseCallable
-        final Rethinkdb.Response response = null;
+        // TODO: Smarter resource usage
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        try {
+            return new QueryResponseCallable<>(
+                httpClient.preparePost(connection.getServerURI())
+                          .setBody(baos.toByteArray()).execute(), translator);
+        } catch (IOException e) {
+            throw new QueryExecutionException(e);
+        }
 
-        return new QueryResponseCallable<>(response, translator);
     }
 
     protected abstract Rethinkdb.Term.Builder contributeArguments(Rethinkdb.Term.Builder argumentBuilder);
 
+    protected Connection getConnection() {
+        return connection;
+    }
 
     protected final Rethinkdb.Term.Builder addArgument(
             Rethinkdb.Term.Builder termBuilder,
@@ -63,7 +78,7 @@ public abstract class StartQuery<T extends QueryResponse> implements Query<T> {
 
         Rethinkdb.Term.Builder withArg = termBuilder.addArgs(argBuilder.setType(type)
                                                     .setDatum(datumBuilder.setType(Rethinkdb.Datum.DatumType.R_STR)
-                                                            .setRStr(value)));
+                                                                          .setRStr(value)));
         return withArg;
     }
 

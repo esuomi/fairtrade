@@ -1,5 +1,7 @@
 package fairtrade.db;
 
+import com.ning.http.client.ListenableFuture;
+import com.ning.http.client.Response;
 import com.rethinkdb.protocol.Rethinkdb;
 
 import java.util.concurrent.Callable;
@@ -12,24 +14,25 @@ import java.util.concurrent.Callable;
  */
 class QueryResponseCallable<T extends QueryResponse> implements Callable<T> {
 
-    private final Rethinkdb.Response response;
+    private final ListenableFuture<Response> response;
     private final Translator<T> translator;
 
-    public QueryResponseCallable(Rethinkdb.Response response, Translator<T> translator) {
+    public QueryResponseCallable(ListenableFuture<Response> response, Translator<T> translator) {
         this.response = response;
         this.translator = translator;
     }
 
     @Override
     public T call() throws Exception {
-        switch (response.getType()) {
-            case CLIENT_ERROR: return translator.onError(ErrorType.CLIENT, response);
-            case COMPILE_ERROR: return translator.onError(ErrorType.COMPILE, response);
-            case RUNTIME_ERROR: return translator.onError(ErrorType.RUNTIME, response);
-            case SUCCESS_ATOM: return translator.onSuccess(SuccessType.ATOMIC, response);
-            case SUCCESS_PARTIAL: return translator.onSuccess(SuccessType.PARTIAL_RESULT, response);
-            case SUCCESS_SEQUENCE: return translator.onSuccess(SuccessType.SEQUENTIAL_RESULT, response);
+        Rethinkdb.Response rethinkResponse = null; // TODO: This, obviously
+        switch (rethinkResponse.getType()) {
+            case CLIENT_ERROR: return translator.onError(ErrorType.CLIENT, rethinkResponse);
+            case COMPILE_ERROR: return translator.onError(ErrorType.COMPILE, rethinkResponse);
+            case RUNTIME_ERROR: return translator.onError(ErrorType.RUNTIME, rethinkResponse);
+            case SUCCESS_ATOM: return translator.onSuccess(SuccessType.ATOMIC, rethinkResponse);
+            case SUCCESS_PARTIAL: return translator.onSuccess(SuccessType.PARTIAL_RESULT, rethinkResponse);
+            case SUCCESS_SEQUENCE: return translator.onSuccess(SuccessType.SEQUENTIAL_RESULT, rethinkResponse);
         }
-        return translator.onError(ErrorType.UNKNOWN, response);
+        return translator.onError(ErrorType.UNKNOWN, rethinkResponse);
     }
 }

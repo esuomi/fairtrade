@@ -2,6 +2,7 @@ package fairtrade.db.table;
 
 import fairtrade.db.Query;
 import fairtrade.db.StartQuery;
+import fairtrade.network.Connection;
 
 import static com.rethinkdb.protocol.Rethinkdb.Term.Builder;
 import static com.rethinkdb.protocol.Rethinkdb.Term.TermType.*;
@@ -20,19 +21,19 @@ public class CreateTableQuery extends StartQuery<TableResponse> implements Query
     private String primaryKey = DEFAULT_PRIMARY_KEY;
     private long cacheSize;
 
-    public CreateTableQuery(String database, String tableName) {
-        this(database, tableName, DEFAULT_PRIMARY_KEY);
+    public CreateTableQuery(Connection connection, String database, String tableName) {
+        this(connection, database, tableName, DEFAULT_PRIMARY_KEY);
     }
 
-    public CreateTableQuery(String database, String tableName, String primaryKey) {
-        super(TABLE_CREATE, new CreateTableTranslator());
+    public CreateTableQuery(Connection connection, String database, String tableName, String primaryKey) {
+        super(connection, TABLE_CREATE, new CreateTableTranslator());
         this.database = database;
         this.tableName = tableName;
         this.primaryKey = primaryKey;
     }
 
     public final CreateTableQuery withPrimaryKey(String newPrimaryKey) {
-        return new CreateTableQuery(tableName, newPrimaryKey);
+        return new CreateTableQuery(getConnection(), tableName, newPrimaryKey);
     }
 
     @Override

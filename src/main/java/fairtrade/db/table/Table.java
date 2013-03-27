@@ -19,6 +19,6 @@ public class Table {
     }
 
     public Query<TableResponse> create() {
-        return new CreateTableQuery(database, table);
+        return new CreateTableQuery(connection, database, table);
     }
 }
